@@ -25,6 +25,7 @@ import modeling
 import optimization
 import tokenization
 import tensorflow as tf
+import pandas as pd
 
 flags = tf.flags
 
@@ -212,9 +213,11 @@ class XnliProcessor(DataProcessor):
 
   def get_train_examples(self, data_dir):
     """See base class."""
-    lines = self._read_tsv(
-        os.path.join(data_dir, "multinli",
-                     "multinli.train.%s.tsv" % self.language))
+#     lines = self._read_tsv(
+#         os.path.join(data_dir, "multinli",
+#                      "multinli.train.%s.tsv" % self.language))
+    
+    lines = pd.read_csv(os.path.join(data_dir, "train_file_1M.csv"))
     examples = []
     for (i, line) in enumerate(lines):
       if i == 0:
@@ -233,16 +236,18 @@ class XnliProcessor(DataProcessor):
 
   def get_dev_examples(self, data_dir):
     """See base class."""
-    lines = self._read_tsv(os.path.join(data_dir, "xnlifa.dev.tsv"))
+#     lines = self._read_tsv(os.path.join(data_dir, "xnli.dev.tsv"))
+    lines = pd.read_csv(os.path.join(data_dir, "test_file_1M.csv"))
+
     examples = []
     for (i, line) in enumerate(lines):
       if i == 0:
         continue
       guid = "dev-%d" % (i)
-      language = tokenization.convert_to_unicode(line[0])
+#       language = tokenization.convert_to_unicode(line[0])
       language = tokenization.convert_to_unicode("fa")
       if language != tokenization.convert_to_unicode(self.language):
-#         continue
+        continue
 #       text_a = tokenization.convert_to_unicode(line[6])
       text_a = tokenization.convert_to_unicode(line["text"])
 #       text_b = tokenization.convert_to_unicode(line[7])
