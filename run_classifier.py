@@ -219,15 +219,15 @@ class XnliProcessor(DataProcessor):
     
     lines = pd.read_csv(os.path.join(data_dir, "train_file_1M.csv"))
     examples = []
-    for (i, line) in enumerate(lines):
-      if i == 0:
-        continue
+    for (i, line) in lines.iterrows():
+#       if i == 0:
+#         continue
       guid = "train-%d" % (i)
 #       text_a = tokenization.convert_to_unicode(line[0])
-      text_a = tokenization.convert_to_unicode(line["text"])
+      text_a = tokenization.convert_to_unicode(line[1])
 #       text_b = tokenization.convert_to_unicode(line[1])
 #       label = tokenization.convert_to_unicode(line[2])
-      label = tokenization.convert_to_unicode(line["cat1"])
+      label = tokenization.convert_to_unicode(str(line[0]))
 #       if label == tokenization.convert_to_unicode("contradictory"):
 #         label = tokenization.convert_to_unicode("contradiction")
 #       examples.append(InputExample(guid=guid, text_a=text_a, text_b=text_b, label=label))
@@ -240,26 +240,27 @@ class XnliProcessor(DataProcessor):
     lines = pd.read_csv(os.path.join(data_dir, "test_file_1M.csv"))
 
     examples = []
-    for (i, line) in enumerate(lines):
-      if i == 0:
-        continue
+    for (i, line) in lines.iterrows():
+#       if i == 0:
+#         continue
       guid = "dev-%d" % (i)
 #       language = tokenization.convert_to_unicode(line[0])
       language = tokenization.convert_to_unicode("fa")
       if language != tokenization.convert_to_unicode(self.language):
         continue
 #       text_a = tokenization.convert_to_unicode(line[6])
-      text_a = tokenization.convert_to_unicode(line["text"])
+      text_a = tokenization.convert_to_unicode(line[1])
 #       text_b = tokenization.convert_to_unicode(line[7])
 #       label = tokenization.convert_to_unicode(line[1])
-      label = tokenization.convert_to_unicode(line["cat1"])
+      label = tokenization.convert_to_unicode(str(line[0]))
 #       examples.append(InputExample(guid=guid, text_a=text_a, text_b=text_b, label=label))
       examples.append(InputExample(guid=guid, text_a=text_a, label=label))
     return examples
 
   def get_labels(self):
     """See base class."""
-    return ['1','2','67','79','12','143','38','125','151','191',]
+    return [str(i) for i in range(10)]
+#     return ['1','2','67','79','12','143','38','125','151','191',]
 #     return ["contradiction", "entailment", "neutral"]
 
 class MnliProcessor(DataProcessor):
@@ -825,7 +826,7 @@ def main(_):
   processor = processors[task_name]()
 
   label_list = processor.get_labels()
-
+    
   tokenizer = tokenization.FullTokenizer(
       vocab_file=FLAGS.vocab_file, do_lower_case=FLAGS.do_lower_case)
 
