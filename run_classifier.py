@@ -258,7 +258,7 @@ class XnliProcessor(DataProcessor):
     return examples
 
   def get_test_examples(self, data_dir):
-    return(get_dev_examples(data_dir))
+    return(self.get_dev_examples(data_dir))
 
 
   def get_labels(self):
