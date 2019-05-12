@@ -257,6 +257,10 @@ class XnliProcessor(DataProcessor):
       examples.append(InputExample(guid=guid, text_a=text_a, label=label))
     return examples
 
+  def get_test_examples(self, data_dir):
+    return(get_dev_examples(data_dir))
+
+
   def get_labels(self):
     """See base class."""
     return [str(i) for i in range(10)]
