@@ -224,7 +224,7 @@ class XnliProcessor(DataProcessor):
 #         continue
       guid = "train-%d" % (i)
 #       text_a = tokenization.convert_to_unicode(line[0])
-      text_a = tokenization.convert_to_unicode(line[1])
+      text_a = tokenization.convert_to_unicode(str(line[1]))
 #       text_b = tokenization.convert_to_unicode(line[1])
 #       label = tokenization.convert_to_unicode(line[2])
       label = tokenization.convert_to_unicode(str(line[0]))
