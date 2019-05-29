@@ -263,7 +263,7 @@ class XnliProcessor(DataProcessor):
 
   def get_labels(self):
     """See base class."""
-    return [str(i) for i in range(10)]
+    return [str(i) for i in range(59)]
 #     return ['1','2','67','79','12','143','38','125','151','191',]
 #     return ["contradiction", "entailment", "neutral"]
 
