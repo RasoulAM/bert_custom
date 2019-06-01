@@ -249,7 +249,7 @@ class XnliProcessor(DataProcessor):
       if language != tokenization.convert_to_unicode(self.language):
         continue
 #       text_a = tokenization.convert_to_unicode(line[6])
-      text_a = tokenization.convert_to_unicode(line[1])
+      text_a = tokenization.convert_to_unicode(str(line[1]))
 #       text_b = tokenization.convert_to_unicode(line[7])
 #       label = tokenization.convert_to_unicode(line[1])
       label = tokenization.convert_to_unicode(str(line[0]))
