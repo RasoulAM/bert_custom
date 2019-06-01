@@ -100,6 +100,10 @@ flags.DEFINE_integer("iterations_per_loop", 1000,
 
 flags.DEFINE_bool("use_tpu", False, "Whether to use TPU or GPU/CPU.")
 
+flags.DEFINE_integer("num_classes", 10,
+  "How many classes for classification"
+)
+
 tf.flags.DEFINE_string(
     "tpu_name", None,
     "The Cloud TPU to use for training. This should be either the name "
@@ -263,7 +267,7 @@ class XnliProcessor(DataProcessor):
 
   def get_labels(self):
     """See base class."""
-    return [str(i) for i in range(59)]
+    return [str(i) for i in range(FLAGS.num_classes)]
 #     return ['1','2','67','79','12','143','38','125','151','191',]
 #     return ["contradiction", "entailment", "neutral"]
 
