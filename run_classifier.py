@@ -898,24 +898,23 @@ def main(_):
         drop_remainder=True)
 	
 	class ExampleCheckpointSaverListener(CheckpointSaverListener):
-	  def begin(self):
-		# You can add ops to the graph here.
-		print('Starting the session.')
-		#self.your_tensor = ...
+      def begin(self):
+        # You can add ops to the graph here.
+        print('Starting the session.')
+        #self.your_tensor = ...
 
-	  def before_save(self, session, global_step_value):
-		print('About to write a checkpoint')
+      def before_save(self, session, global_step_value):
+        print('About to write a checkpoint')
 
-	  def after_save(self, session, global_step_value):
-		print('Done writing checkpoint.')
-		try:
-		  with open("end_command.txt", 'r') as end_command:
-		    if 'stop' in end_command.readline()
-		      return True
-		except:
-		  return False
+      def after_save(self, session, global_step_value):
+        print('Done writing checkpoint.')
+        try:
+          with open("end_command.txt", 'r') as end_command:
+            if 'stop' in end_command.readline()
+              return True
+        except:
+          return False
 
-	
     estimator.train(input_fn=train_input_fn, max_steps=num_train_steps, saving_listeners=[ExampleCheckpointSaverListener()])
 
   if FLAGS.do_eval:
