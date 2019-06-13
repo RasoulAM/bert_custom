@@ -896,7 +896,7 @@ def main(_):
         seq_length=FLAGS.max_seq_length,
         is_training=True,
         drop_remainder=True)
-	
+    from tensorflow.train import CheckpointSaverListener
     class ExampleCheckpointSaverListener(CheckpointSaverListener):
       def begin(self):
         # You can add ops to the graph here.
