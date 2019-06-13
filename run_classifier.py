@@ -910,7 +910,7 @@ def main(_):
         print('Done writing checkpoint.')
         try:
           with open("end_command.txt", 'r') as end_command:
-            if 'stop' in end_command.readline()
+            if 'stop' in end_command.readline():
               return True
         except:
           return False
