@@ -897,7 +897,7 @@ def main(_):
         is_training=True,
         drop_remainder=True)
 	
-	class ExampleCheckpointSaverListener(CheckpointSaverListener):
+    class ExampleCheckpointSaverListener(CheckpointSaverListener):
       def begin(self):
         # You can add ops to the graph here.
         print('Starting the session.')
