@@ -104,6 +104,10 @@ flags.DEFINE_integer("num_classes", 10,
   "How many classes for classification"
 )
 
+flags.DEFINE_string("classes", "0,1,2,3,4,5,6,7,8,9",
+  "The classes used for classification"
+)
+
 tf.flags.DEFINE_string(
     "tpu_name", None,
     "The Cloud TPU to use for training. This should be either the name "
@@ -217,7 +221,7 @@ class PersianClassifier(DataProcessor):
   def get_train_examples(self, data_dir):
     """See base class."""
     
-    lines = pd.read_csv(os.path.join(data_dir, "train_file_1M.csv"))
+    lines = pd.read_csv(os.path.join(data_dir, "train_file.csv"))
     examples = []
     for (i, line) in lines.iterrows():
       guid = "train-%d" % (i)
@@ -228,7 +232,7 @@ class PersianClassifier(DataProcessor):
 
   def get_dev_examples(self, data_dir):
     """See base class."""
-    lines = pd.read_csv(os.path.join(data_dir, "test_file_1M.csv"))
+    lines = pd.read_csv(os.path.join(data_dir, "test_file.csv"))
 
     examples = []
     for (i, line) in lines.iterrows():
@@ -247,7 +251,8 @@ class PersianClassifier(DataProcessor):
 
   def get_labels(self):
     """See base class."""
-    return [str(i) for i in range(FLAGS.num_classes)]
+    return FLAGS.classes.split(',')
+    # return [str(i) for i in range(FLAGS.num_classes)]
 #     return ['1','2','67','79','12','143','38','125','151','191',]
 #     return ["contradiction", "entailment", "neutral"]
 
