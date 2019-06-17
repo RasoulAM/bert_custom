@@ -100,10 +100,6 @@ flags.DEFINE_integer("iterations_per_loop", 1000,
 
 flags.DEFINE_bool("use_tpu", False, "Whether to use TPU or GPU/CPU.")
 
-flags.DEFINE_integer("num_classes", 10,
-  "How many classes for classification"
-)
-
 flags.DEFINE_string("classes", "0,1,2,3,4,5,6,7,8,9",
   "The classes used for classification"
 )
